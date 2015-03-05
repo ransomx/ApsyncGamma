@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./WEB-INF/template.xhtml">
+        <ui:define name="content">
+            <h1>WebSockets API</h1>
+            <div>
+                <p>
+                    Tato stránka je kopií stránky pro testování websocketů modifikována pro využití překladače.
+                </p>
+                <p>
+                    Vzor syntaxe: con{"type":"NEW","object":{"firstName":"Karel","lastName":"Q","nick":"xrn","email":"ppen@gas.com","phone":{"number":"+420775163795"}},"hashCode":"1111"}
+                </p>
+            </div>
+
+
+            <h:outputScript library="js" name="translatorSocket.js" />
+            <h:form id="control">
+                <h:inputText size="100" id="text" value="#{webSocketBean.message}" />
+                <h:commandButton id="send" onclick="doSend()" value="Send">
+                    <f:ajax execute="@form" render="@none" />
+                </h:commandButton>
+                <h:commandButton id="reset" value="Reset"/>
+            </h:form>
+
+            <div id="output"></div>
+        </ui:define>
+
+    </ui:composition>
+</html>

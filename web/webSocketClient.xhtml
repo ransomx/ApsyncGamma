@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./WEB-INF/template.xhtml">
+        <ui:define name="content">
+            <h1>WebSockets API</h1>
+            <div>
+                <p>
+                    Tato stránka slouží ke zkoušení komunikace websockety. Budou zde uvedeny příkazy implementované
+                    na serveru, které lze použít použít pro komunikaci a server s nimi bude nakládat rozdílně.
+                </p>
+                <p>
+                    Dále zde budou uvedena schémata pro JSON objekty, které využijeme pro jednotlivé typy komunikací.
+                </p>
+            </div>
+
+            <div>
+                <table class="tab">
+                    <thead>
+                        <tr>
+                            <td>
+                                Příkaz
+                            </td>
+                            <td>
+                                Popis
+                            </td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                loginDevice()
+                            </td>
+                            <td>
+                                Přihlásí zařízení nacházející se pod daným číslem, které musí být v databázi - např. loginDevice(+420 775 761 325).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                logoutDevice()
+                            </td>
+                            <td>
+                                odhlásí zařízení z aplikace pro konkrétně otevřenou session.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                devMessages()
+                            </td>
+                            <td>
+                                Vypíše všechny kontakty a zprávy z komentálně přihlášeného zařízení.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                devMessages(cislo)
+                            </td>
+                            <td>
+                                Vypíše všechny kontaktu daného tel. číslem. Příklad: devMessages(+420 876 874 541).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                rsync
+                            </td>
+                            <td>
+                                Provede synchronizaci pro dané přihlášené číslo.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="tab">
+                    <thead>
+                        <tr>
+                            <td>
+                                Schéma
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Schéma automaticky generováno pomocí gson knihovny, která je dostupná na gitu.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                WIP
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+            <h:outputScript library="js" name="webSocket.js" />
+            <h:form id="control">
+                <p:panelGrid columns="1">
+                    <p:inputTextarea id="text" value="#{webSocketBean.message}" cols="120" />
+                </p:panelGrid>
+                <p:commandButton id="send" onclick="doSend()" value="Send">
+                    <f:ajax execute="@form" render="@none" />
+                </p:commandButton>
+                <p:commandButton id="reset" value="Reset" immediate="true" ajax='false'/>
+            </h:form>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td><div id="output"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>
