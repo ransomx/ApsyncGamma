@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var wsUri = "ws://apsync.ddns.net/SMSCore/anth";
+var wsUri = "ws://apsync.ddns.net:8080/SMSCore/anth";
 var output;
 var message;
 
